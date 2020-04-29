@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Aftermovie download</h1>
+            <p class="center">{{ downloads|length }} items in aftermovie list. <a href="?download=zip"><i class="material-icons">file_download</i> Download zip</a></p>
+        </div>
+    </div>
+    <ul class="collection">
+        {% for d in downloads %}
+            <li class="collection-item"><div>{{ d.media }}<a href="/media/{{ d.media }}" class="secondary-content"><i class="material-icons">file_download</i></a></div></li>
+        {% endfor %}
+      </ul>
+{% endblock %}

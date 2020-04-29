@@ -1,0 +1,73 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Admin scoreboard</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <table class="highlight">
+                    <thead>
+                    <tr>
+                        {% for location in locations %}
+                        <th data-field="loc-{{ location.id }}">{{ location }}</th>
+                        {% endfor %}
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for location in locations %}
+                        <td>
+                            {% for team in teams %}
+                                <span class="{% if location.id in team.solved_locations %}green{% else %}red{% endif %}-text" style="font-weight: bold;">{{ team }}</span><BR />
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <table class="highlight">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Team</th>
+                        <th data-field="pictures">Picture locations</th>
+                        <th data-field="tasks">Tasks</th>
+                        <th data-field="tasks">Bonus</th>
+                        <th data-field="tasks">Penalty</th>
+                        <th data-field="total">Total score</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for team in teams %}
+                        <tr>
+                            <td>{{ team.name }}</td>
+                            <td>{{ team.points_pictures }}</td>
+                            <td>{{ team.points_tasks }}</td>
+                            <td>{{ team.points_bonus }}</td>
+                            <td>{{ team.points_penalty }}</td>
+                            <td>{{ team.points_total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

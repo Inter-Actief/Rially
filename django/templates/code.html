@@ -1,0 +1,4 @@
+<div class="chip {% if done %}green{% elif processing%}orange{% else %}red{% endif %} white-text" style="font-size: 16px;font-weight: bold;">
+    {{ type }}-{{ location }}{% if id %}{% if location %}-{% endif %}{{ id }}{% endif %}
+    <!--<span class="close material-icons" style="font-size: 16px;font-weight: bold;">{% if done %}done{% else %}close{% endif %}</span>-->
+</div>

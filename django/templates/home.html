@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">{{ team.name }}</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">An overview of the route</h5>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container center-align">
+        <div class="section center-align">
+
+            <!--   Icon Section   -->
+
+            <div class="row hide-on-med-and-down center-align">
+                {% for location in locations %}
+                    {% if location.pk in team.solved_locations %}
+                        <div class="col">
+                            <div class="icon-block">
+                                <a href="/location/{{ location.id }}/"><h2 class="center-align blue-text">{{ location.name }}</h2></a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col">
+                            <div class="icon-block">
+                                <p class="center-align"><a href="/location/{{ location.id }}/"><i class="material-icons blue-text" style="font-size:80px;">lock</i></a></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if not forloop.last %}
+                        <div class="col">
+                            <div class="icon-block">
+                                <p class="center-align"><i class="material-icons" style="font-size:80px;color:#AAA;">arrow_forward</i></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="hide-on-large-only center-align">
+                {% for location in locations %}
+                    {% if location.pk in team.solved_locations %}
+                        <div class="col">
+                            <div class="icon-block">
+                                <a href="/location/{{ location.id }}/"><h2 class="center-align blue-text">{{ location.name }}</h2></a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col">
+                            <div class="icon-block">
+                                <p class="center-align"><a href="/location/{{ location.id }}/"><i class="material-icons blue-text" style="font-size:80px;">lock</i></a></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if not forloop.last %}
+                        <br />
+                        <div class="col">
+                            <div class="icon-block">
+                                <p class="center-align"><i class="material-icons" style="font-size:80px;color:#AAA;">arrow_downward</i></p>
+                            </div>
+                        </div>
+                        <br />
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

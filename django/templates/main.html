@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Rially 2019</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static "css/materialize.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static "css/custom.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<ul id="dropdown-locations" class="dropdown-content">
+    {% for location in locations %}
+        {% if location.pk in team.solved_locations %}
+            <li><a href="/location/{{ location.id }}/">{{ location.name }}</a></li>
+        {% else %}
+            <li><a href="/location/{{ location.id }}/"><i class="material-icons">lock</i></a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<ul id="dropdown-locations2" class="dropdown-content">
+    {% for location in locations %}
+        {% if location.pk in team.solved_locations %}
+            <li><a href="/location/{{ location.id }}/">{{ location.name }}</a></li>
+        {% else %}
+            <li><a href="/location/{{ location.id }}/"><i class="material-icons">lock</i></a></li>
+        {% endif %}
+    {% endfor %}
+</ul>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">Rially 2019</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/home">Home</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown-locations">Locations<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="/tasks">Tasks</a></li>
+            <li><a href="/bonus">Bonus/penalty</a></li>
+            <li><a href="/score">Scoreboard</a></li>
+            <li><a href="/help">Help</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="/home">Home</a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown-locations2">Locations<i class="material-icons right">arrow_drop_down</i></a></li>
+            <li><a href="/tasks">Tasks</a></li>
+            <li><a href="/bonus">Bonus/penalty</a></li>
+            <li><a href="/score">Scoreboard</a></li>
+            <li><a href="/help">Help</a></li>
+            <li><a href="/logout">Log out</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+<main>
+    {% block pagebody %}
+    {% endblock %}
+</main>
+
+<footer class="page-footer orange">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Rially 2019</h5>
+                <p class="grey-text text-lighten-4">
+                    For questions, please contact one of the following:<br />
+                <table>
+                    <tr>
+                        <td>Committee</td>
+                        <td>Leo Heyns</td>
+                    </tr>
+                    <tr>
+                        <td><a href="tel:0534893756">053 489 3756</a></td>
+                        <td><a href="tel:+31637192868">+316 37192868</a></td>
+                    </tr>
+                </table>
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static "js/materialize.js" %}"></script>
+<script src="{% static "js/init.js" %}"></script>
+
+</body>
+</html>

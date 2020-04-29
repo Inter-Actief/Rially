@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Admin Panel</h1>
+            <div class="row">
+                <div class="item">
+                    <h3>Quick links</h3>
+                    <p>
+                        <a href="/adminrate" target="_blank">> Location and picture rating</a> <br>
+                        <a href="/admintaskrate" target="_blank">> Regular and location tasks rating</a> <br>
+			<a href="/admindownload" target="_blank">> Download all aftermovie images</a> <br>
+                        <a href="/adminratedist" target="_blank">> Distributed rating</a>
+                    </p>
+                </div>
+                <div class="item-end">
+                    <h3>Submissions</h3>
+                    <p>Click the button to {{ submissionstate|yesno:"close the submissions.,open the submissions. Make sure you open the submissions at the correct time!"}}</p>
+                    <form action="/adminpanel/" method="post">
+                        {% csrf_token %}
+                        {% if submissionstate %}
+                            <input class="waves-effect wave-light btn red" type="submit" name="setsubmissions" value="close"></input>
+                        {% else %}
+                            <input class="waves-effect wave-light btn green" type="submit" name="setsubmissions" value="open"></input>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="item">
+                    <h3>Add teams</h3>
+                    <p>Since adding teams is quite a hassle to do in the admin interface, here you can automatically enter teams into the database by providing an enter-separated list of team names. A CSV file with the teams and tokens can be found on the server after you've generated the teams here. This is a file containing all the team names and passwords in plain text. We do not store this data in the database since Django doesn't allow it and it is not a good idea, this CSV is a workaround so you can still generate the teams and access all this data in a nice format. Ask the developer/administrator to get it from the server.</p>
+                    <form action="/adminpanel/" method="post">
+                        {% csrf_token %}
+                        <textarea class="teaminput" id="teams" name="teams"></textarea>
+                        <input class="waves-effect wave-light btn green" type="submit" name="addteams" value="submit"></input>
+                    </form>
+                </div>
+                
+                <div class="item-end">
+                    <h3>Submissions</h3>
+                    <p>Click the button to {{ showscorestate|yesno:"show the scores.,hide the scores.!"}}</p>
+                    <form action="/adminpanel/" method="post">
+                        {% csrf_token %}
+                        {% if showscorestate %}
+                            <input class="waves-effect wave-light btn red" type="submit" name="setshowscore" value="hide"></input>
+                        {% else %}
+                            <input class="waves-effect wave-light btn green" type="submit" name="setshowscore" value="show"></input>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container">
+    </div>
+{% endblock %}

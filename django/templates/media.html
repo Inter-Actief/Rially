@@ -1,0 +1,9 @@
+{% if media|slice:"-4:" == ".mp4" %}
+    <video style="width:100%;" controls>
+        <source src="{{ media }}" type="video/mp4">
+    </video>
+{% else %}
+    <a href="{{ media }}">
+        <img src="{{ media }}" style="width:100%;"/>
+    </a>
+{% endif %}

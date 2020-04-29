@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Bonus points</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <table class="highlight">
+                    <thead>
+                    <tr>
+                        <th data-field="points">Points</th>
+                        <th data-field="reason">Reason</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for bonus in team.bonus_set.all %}
+                        <tr>
+                            <td><span class="green-text" style="font-weight: bold;">+{{ bonus.points }}</span></td>
+                            <td>{{ bonus.reason }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Penalty</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <table class="highlight">
+                    <thead>
+                    <tr>
+                        <th data-field="points">Points</th>
+                        <th data-field="reason">Reason</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for penalty in team.penalty_set.all %}
+                        <tr>
+                            <td><span class="red-text" style="font-weight: bold;">-{{ penalty.points }}</span></td>
+                            <td>{{ penalty.reason }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

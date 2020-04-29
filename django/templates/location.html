@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    {% if location.pk in team.solved_locations %}
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <h1 class="header center orange-text">{{ object.name }}</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">{{ object.description }}</h5>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">camera_alt</i></h2>
+                            <h5 class="center">Bonus pictures</h5>
+                            {% for picture in object.picture_set.all %}
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="card">
+                                            <div class="card-image">
+                                                <a href="{{ picture.image.url }}" target="_blank"><img src="{{ picture.image.url }}"{% if picture.pk in team.solved_pictures %} class="doneimage"{% endif %}></a>
+                                                <!--
+                                                {% if picture.pk in team.solved_pictures %}
+                                                    <a class="btn-floating halfway-fab green"><i class="material-icons">done</i></a>
+                                                {% else %}
+                                                    <a class="btn-floating halfway-fab red"><i class="material-icons">close</i></a>
+                                                {% endif %}
+                                                -->
+                                            </div>
+                                            <div class="card-content">
+                                                <p>
+                                                    {% if picture.pk in team.solved_pictures %}
+                                                        {% include 'code.html' with type='PL' location=location.id id=picture.id done=True processing=False%}
+                                                    {% elif picture.pk in team.processing_pictures %}
+                                                        {% include 'code.html' with type='PL' location=location.id id=picture.id done=False processing=True %}
+                                                    {% else %}
+                                                        {% include 'code.html' with type='PL' location=location.id id=picture.id done=False processing=False%}
+                                                    {% endif %}
+                                                    Bonus picture - {{ picture.points }} points</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">extension</i></h2>
+                            <h5 class="center">Puzzles for the next location</h5>
+                            <p class="center">
+                            <ul class="collection with-header">
+                                {% for puzzle in object.puzzle_set.all %}
+                                    <li class="collection-item {% if nextlocation.id in team.solved_locations %}green lighten-4{% endif %}"><div>{{ puzzle.name }}{% if puzzle.file %}<a href="{{ puzzle.file.url }}" target="_blank" class="secondary-content"><i class="material-icons">attach_file</i></a>{% endif %}</div></li>
+                                {% endfor %}
+                            </ul>
+                            {% if nextlocation %}
+                                <div class="center">
+                                    {% if nextlocation.id in team.solved_locations %}
+                                        {% include 'code.html' with type='L' location=nextlocation.id done=True processing=False%}
+                                    {% elif nextlocation.id in team.processing_locations %}
+                                        {% include 'code.html' with type='L' location=nextlocation.id done=False processing=True %}
+                                    {% else %}
+                                        {% include 'code.html' with type='L' location=nextlocation.id done=False processing=False%}
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">assignment_late</i></h2>
+                            <h5 class="center">Tasks</h5>
+
+                            <p class="light">
+                            <ul class="collection with-header">
+                                {% for locationtask in object.locationtask_set.all %}
+                                    <li class="collection-item {% if locationtask.pk in team.solved_locationtasks %}green{% elif locationtask.pk in team.processing_locationtasks %}orange{% endif %} lighten-4"><div>
+                                        {% if locationtask.pk in team.solved_locationtasks %}
+                                            {% include 'code.html' with type='TL' location=location.id id=locationtask.id done=True processing=False %}
+                                        {% elif locationtask.pk in team.processing_locationtasks %}
+                                            {% include 'code.html' with type='TL' location=location.id id=locationtask.id done=False processing=True %}
+                                        {% else %}
+                                            {% include 'code.html' with type='TL' location=location.id id=locationtask.id done=False processing=False %}
+                                        {% endif %}
+                                        {{ locationtask.name }}<!--<i class="material-icons secondary-content">{% if locationtask.pk in team.solved_locationtasks %}done{% else %}close{% endif %}</i>--></div>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="section no-pad-bot" id="index-banner">
+            <div class="container">
+                <h1 class="header center orange-text">???</h1>
+                <div class="row center">
+                    <h5 class="header col s12 light">You did not unlock this location yet.</h5>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="section">
+
+                <!--   Icon Section   -->
+                <div class="row">
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">camera_alt</i></h2>
+                            <h5 class="center">Bonus pictures</h5>
+                            <p class="center"><i class="material-icons" style="font-size:160px;color:#AAA;">lock</i></p>
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">extension</i></h2>
+                            <h5 class="center">Puzzles for the next location</h5>
+                            <p class="center"><i class="material-icons" style="font-size:160px;color:#AAA;">lock</i></p>
+
+                        </div>
+                    </div>
+
+                    <div class="col s12 m4">
+                        <div class="icon-block">
+                            <h2 class="center light-blue-text"><i class="material-icons">assignment_late</i></h2>
+                            <h5 class="center">Tasks</h5>
+                            <p class="center"><i class="material-icons" style="font-size:160px;color:#AAA;">lock</i></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

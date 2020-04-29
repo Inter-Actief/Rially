@@ -1,0 +1,47 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Scoreboard</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">An overview of the scores</h5>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <!--   Icon Section   -->
+            <div class="row">
+                <table class="highlight responsive-table">
+                    <thead>
+                    <tr>
+                        <th data-field="name">Team</th>
+                        <th data-field="pictures">Picture locations</th>
+                        <th data-field="tasks">Tasks</th>
+                        <th data-field="tasks">Bonus</th>
+                        <th data-field="tasks">Penalty</th>
+                        <th data-field="total">Total score</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for t in teams %}
+                        <tr{% if t.pk is team.pk %} class="green lighten-4"{% endif %}>
+                            <td>{{ t.name }}</td>
+                            <td>{{ t.points_pictures }}</td>
+                            <td>{{ t.points_tasks }}</td>
+                            <td>{{ t.points_bonus }}</td>
+                            <td>{{ t.points_penalty }}</td>
+                            <td>{{ t.points_total }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

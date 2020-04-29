@@ -1,0 +1,68 @@
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <title>Rially 2019</title>
+
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static "css/materialize.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="{% static "css/custom.css" %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+</head>
+<body>
+<main>
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rially 2019</a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="/home">Home</a></li>
+        </ul>
+
+        <ul id="nav-mobile" class="side-nav">
+            <li><a href="/home">Home</a></li>
+        </ul>
+        <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+</nav>
+
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <h1 class="header center orange-text">Help</h1>
+        <h2>Submissions</h2>
+	<p>First you must create a Telegram group. In this group you have to add the user <bold>rially_ia_bot</bold>. Make a submission by sending a picture/video with the task/picture code as a caption.</p>
+        <h2>Tasks</h2>
+        <p>There are two different types of tasks: Regular tasks and Location tasks. Regular tasks are available to everyone from the beginning of the event in the envelopes and on the website. Location tasks can be unlocked by unlocking locations via the website. The goal of a task is to fabricate a picture or video of your team executing the task in the most creative way. Creativeness will earn you the most points, but more importantly: have fun doing it!</p>
+        <h2>Bonus Pictures</h2>
+        <p>To earn the points for the bonus pictures, you need to find out where the picture was taken and get to this point. When you have found it, take the same picture, but with one or more team members in it, and send it on the Telegram group. The committee will then allocate you the points.</p>
+    </div>
+</div>
+
+</main>
+<footer class="page-footer orange">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Rially 2019</h5>
+                <p class="grey-text text-lighten-4">
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+        </div>
+    </div>
+</footer>
+
+
+<!--  Scripts-->
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static "js/materialize.js" %}"></script>
+<script src="{% static "js/init.js" %}"></script>
+
+</body>
+</html>

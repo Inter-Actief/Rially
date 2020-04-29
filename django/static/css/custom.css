@@ -1,0 +1,34 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.doneimage {
+    -webkit-filter: sepia(90%);
+    opacity: 0.4;
+}
+
+.item {
+    float: left;
+    width: 50%;
+    padding: 10px;
+}
+
+.item-end {
+    padding: 10px;
+    width: 50%;
+    float: right;
+}
+
+.last {
+    margin-right: 0;
+}
+
+.teaminput {
+    height: 300px;
+}

@@ -1,0 +1,12 @@
+[Unit]
+Description=Rially Telegram Bot
+After=network.target
+
+[Service]
+ExecStart=/data/environment/rially/bin/python /data/htdocs_committees/rially/django/riallybot/bot.py
+Restart=on-failure
+WorkingDirectory=/data/htdocs_committees/rially/django
+
+[Install]
+WantedBy=multi-user.target
+Alias=rially-telegram-bot.service

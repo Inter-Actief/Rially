@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <h1 class="header center orange-text">Tasks</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="section">
+
+            <ul class="collection with-header">
+                {% for task in tasks %}
+                    <li class="collection-item {% if task.pk in team.solved_tasks %}green{% elif task.pk in team.processing_tasks %}orange{% endif %} lighten-4"><div>
+                        {% if task.pk in team.solved_tasks %}
+                            {% include 'code.html' with type='T' id=task.id done=True processing=False %}
+                        {% elif task.pk in team.processing_tasks %}
+                            {% include 'code.html' with type='T' id=task.id done=False processing=True %}
+                        {% else %}
+                            {% include 'code.html' with type='T' id=task.id done=False processing=False %}
+                        {% endif %}
+                        {{ task.name }}<!--<i class="material-icons secondary-content">{% if locationtask.pk in team.solved_locationtasks %}done{% else %}close{% endif %}</i>--></div>
+                    </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+    </div>
+{% endblock %}

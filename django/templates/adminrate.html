@@ -1,0 +1,155 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block pagebody %}
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            {% if page_type == "task" %}
+                <h1 class="header center orange-text">Admin task rate</h1>
+                <p class="center">This page is for rating tasks and location tasks (T-5, T-1-1)</p>
+            {% elif page_type == "location" %}
+                <h1 class="header center orange-text">Admin location rate</h1>
+                <p class="center">This page is for rating locations and bonus pictures (L-2, PL-1-1)</p>
+            {% endif %}
+            <p class="center">{{ queue_length }} items in queue, {{ queue_important }} importants, longest wait time is {{ queue_longest|timesince }}.</p>
+            <p class="center">
+                <a href="/admin/rially/bonus/">Bonus points</a>
+                <a href="/admin/rially/penalty/">Penalty points</a>
+            </p>
+            {% if messages %}
+                <ul class="messages center">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+    <form id="frm" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="id" value="{{ id }}" />
+        <input type="hidden" name="extra" id="extrafield" value="" />
+        <input type="hidden" name="queue" value="{{ queue }}" />
+        {% if type == 'task' or type == 'locationtask' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4><b>{% if type == 'task' %}Task{% else %}Locationtask{% endif %}:</b> {{ subject.name }}</h4> <h6>By team {{ team }}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        {% include "media.html" with media=file %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input placeholder="Points" id="points" name="points" type="number" class="validate" style="font-size:50px;text-align:center;">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <p>
+                            <input type="checkbox" id="aftermovie" name="aftermovie" />
+                            <label for="aftermovie">This material must be in the aftermovie</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        <a class="waves-effect waves-light btn" href="javascript:void(0);" onclick="check('Are you sure?');" style="width:100%;">Submit</a>
+                    </div>
+                </div>
+            </div>
+        {% elif type == 'location' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>Is the following location at <b>{{ subject.name }}</b>?</h4> <h6>By team {{ team }}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12">
+                        {% include "media.html" with media=file %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <p>
+                            <input type="checkbox" id="aftermovie" name="aftermovie" />
+                            <label for="aftermovie">This material must be in the aftermovie</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <a class="waves-effect waves-light btn green" style="width:100%;" href="javascript:void(0);" onclick="check('Are you sure?','yes');">YES</a>
+                    </div>
+                    <div class="col s6">
+                        <a class="waves-effect waves-light btn red" style="width:100%;" href="javascript:void(0);" onclick="check('Are you sure?','no');">NO</a>
+                    </div>
+                </div>
+            </div>
+        {% elif type == 'picture' %}
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>Are the following pictures on the same location?</h4> <h6>By team {{ team }}</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 m6">
+                        {% include "media.html" with media=subject_name %}
+                    </div>
+                    <div class="col s12 m6">
+                        {% include "media.html" with media=file %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s12 center">
+                        <p>
+                            <input type="checkbox" id="aftermovie" name="aftermovie" />
+                            <label for="aftermovie">This material must be in the aftermovie</label>
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6">
+                        <a class="waves-effect waves-light btn green" style="width:100%;" href="javascript:void(0);" onclick="check('Are you sure?','yes');">YES</a>
+                    </div>
+                    <div class="col s6">
+                        <a class="waves-effect waves-light btn red" style="width:100%;" href="javascript:void(0);" onclick="check('Are you sure?','no');">NO</a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center">
+                        <h4>The queue is empty or an error occurred. <BR>This page will be automatically refreshed in <b><span id="seconds">5</span></b> seconds.</h4>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </form>
+    <script>
+        window.onload = function() {
+            setTimeout(seconds, 1000);
+        };
+        function seconds() {
+            var s = document.getElementById('seconds').innerText*1;
+            if (s<=0) {
+                location.reload();
+            } else {
+                s--;
+                document.getElementById('seconds').innerText = s;
+                setTimeout(seconds, 1000);
+            }
+        }
+        function check(txt, extra) {
+            document.getElementById('extrafield').value = extra;
+            if (confirm(txt)) {
+                document.getElementById('frm').submit();
+            }
+        }
+    </script>
+{% endblock %}

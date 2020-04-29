@@ -1,0 +1,4 @@
+
+
+# Create a new telegram bot and generate a token
+TOKEN = 'example:token'
