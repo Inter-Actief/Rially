@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Rially 2019</title>
+    <title>Rially $YEAR</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -31,7 +31,7 @@
     {% endfor %}
 </ul>
 <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">Rially 2019</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="/home" class="brand-logo">Rially <span class="year"></span></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/home">Home</a></li>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown-locations">Locations<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -63,17 +63,17 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Rially 2019</h5>
+                <h5 class="white-text">Rially <span class="year"></span></h5>
                 <p class="grey-text text-lighten-4">
                     For questions, please contact one of the following:<br />
                 <table>
                     <tr>
                         <td>Committee</td>
-                        <td>Leo Heyns</td>
+                        <td>Niek Pennings</td>
                     </tr>
                     <tr>
-                        <td><a href="tel:0534893756">053 489 3756</a></td>
-                        <td><a href="tel:+31637192868">+316 37192868</a></td>
+                        <td><a class="black-text" href="tel:+31534893756">+31 53 489 3756</a></td>
+                        <td><a class="black-text" href="tel:+31626106334">+31 6 26106334</a></td>
                     </tr>
                 </table>
                 </p>
@@ -94,6 +94,7 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="{% static "js/materialize.js" %}"></script>
 <script src="{% static "js/init.js" %}"></script>
+<script src="{% static "js/year.js" %}"></script>
 
 </body>
 </html>

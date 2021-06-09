@@ -5,13 +5,16 @@
             <h1 class="header center orange-text">Admin Panel</h1>
             <div class="row">
                 <div class="item">
-                    <h3>Quick links</h3>
-                    <p>
-                        <a href="/adminrate" target="_blank">> Location and picture rating</a> <br>
-                        <a href="/admintaskrate" target="_blank">> Regular and location tasks rating</a> <br>
-			<a href="/admindownload" target="_blank">> Download all aftermovie images</a> <br>
-                        <a href="/adminratedist" target="_blank">> Distributed rating</a>
-                    </p>
+                    <h3>Scores</h3>
+                    <p>Click the button to {{ showscorestate|yesno:"hide the scores.,show the scores.!"}}</p>
+                    <form action="/adminpanel/" method="post">
+                        {% csrf_token %}
+                        {% if showscorestate %}
+                            <input class="waves-effect wave-light btn red" type="submit" name="setshowscore" value="hide"></input>
+                        {% else %}
+                            <input class="waves-effect wave-light btn green" type="submit" name="setshowscore" value="show"></input>
+                        {% endif %}
+                    </form>
                 </div>
                 <div class="item-end">
                     <h3>Submissions</h3>
@@ -38,16 +41,29 @@
                 </div>
                 
                 <div class="item-end">
-                    <h3>Submissions</h3>
-                    <p>Click the button to {{ showscorestate|yesno:"show the scores.,hide the scores.!"}}</p>
-                    <form action="/adminpanel/" method="post">
-                        {% csrf_token %}
-                        {% if showscorestate %}
-                            <input class="waves-effect wave-light btn red" type="submit" name="setshowscore" value="hide"></input>
-                        {% else %}
-                            <input class="waves-effect wave-light btn green" type="submit" name="setshowscore" value="show"></input>
-                        {% endif %}
-                    </form>
+                    <div>
+                        <h3>Quick links</h3>
+                        <p>
+                            <a href="/adminrate" target="_blank">> Location and picture rating</a> <br>
+                            <a href="/admintaskrate" target="_blank">> Regular and location tasks rating</a> <br>
+                <a href="/admindownload" target="_blank">> Download all aftermovie images</a> <br>
+                            <a href="/adminratedist" target="_blank">> Distributed rating</a> <br>
+                            <a href="/bonus" target="_blank">> Add bonus points</a> <br>
+                            <a href="/penalty" target="_blank">> Add penalty points</a>
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3>To do before Rially:</h3>
+                        > Add teams (on this page)<br>
+                        > Send teams their password and telegram key (located in teams.csv on the server)<br>
+                        <a href="/admin/rially/puzzle" target="_blank">> Add puzzles</a><br>
+                        <a href="/admin/rially/location" target="_blank">> Add locations</a><br>
+                        <a href="/admin/rially/task" target="_blank">> Add tasks</a><br>
+                        <a href="/admin/rially/locationtask" target="_blank">> Add location tasks</a><br>
+                        <a href="/admin/rially/picture" target="_blank">> Add bonus pictures</a><br>
+                        > Open the submissions
+                    </div>
                 </div>
             </div>
             <div class="row">
