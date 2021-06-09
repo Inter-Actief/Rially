@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-    <title>Rially 2019</title>
+    <title>Rially $YEAR</title>
 
     <!-- CSS  -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,7 +16,7 @@
 <body>
 <main>
 <nav class="light-blue lighten-1" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rially 2019</a>
+    <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Rially <span class="year"></span></a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/home">Home</a></li>
         </ul>
@@ -45,7 +45,7 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Rially 2019</h5>
+                <h5 class="white-text">Rially <span class="year"></span></h5>
                 <p class="grey-text text-lighten-4">
                 </p>
             </div>
@@ -63,6 +63,7 @@
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="{% static "js/materialize.js" %}"></script>
 <script src="{% static "js/init.js" %}"></script>
+<script src="{% static "js/year.js" %}"></script>
 
 </body>
 </html>

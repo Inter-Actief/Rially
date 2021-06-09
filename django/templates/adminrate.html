@@ -138,7 +138,10 @@
         function seconds() {
             var s = document.getElementById('seconds').innerText*1;
             if (s<=0) {
-                location.reload();
+                // Set the location again because otherwise the user will send information multiple times
+                // browsers will display a popup about this
+                window.location=window.location;
+                window.location.reload();
             } else {
                 s--;
                 document.getElementById('seconds').innerText = s;
