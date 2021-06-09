@@ -12,10 +12,8 @@ import string
 from datetime import datetime
 
 updater = Updater(token=settings.TOKEN)
-# media_path = "/data/htdocs_committees/rially/media"
-# python_path = "/data/environment/rially/bin/python"
-media_path = "../media"
-python_path = "python"
+media_path = "/data/htdocs_committees/rially/media"
+python_path = "/data/environment/rially/bin/python"
 dispatcher = updater.dispatcher
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
