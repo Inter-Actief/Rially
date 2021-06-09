@@ -25,10 +25,12 @@ def is_submission_open():
 def msg(bot, update, txt):
     bot.send_message(chat_id=update.message.chat_id, text=str(txt))
 
+def msg_formatted(bot, update, txt, mode="Markdown"):
+    bot.send_message(chat_id=update.message.chat_id, text=str(txt), parse_mode=mode)
 
 def start(bot, update):
     bot.send_message(chat_id=update.message.chat_id, text= \
-        "Welcome to the Rially of 2019! \nPlease log in with /login [token]")
+        f"Welcome to the Rially of {datetime.now().year}! \nPlease log in with /login [token]")
 
 
 def logout(bot, update):
@@ -68,10 +70,12 @@ def help(bot, update):
     response = json.loads(response)
     m = ""
     if response['in_team']:
-        m = m + "You are in team {}.\n\nTo submit a picture or video, send it to me with the correct code in the caption.".format(response['team'])
+        m = m + f"You are in team {response['team']}.\n\nTo submit a picture or video, send it to me with the correct code in the caption.\n" \
+                f"Use e.g. `L-1` for location 1, `PL-1-1` for bonus picture 1, location 1, `TL1-1` for task 1, " \
+                f"location 1 or `T-1` for task 1"
     else:
         m = m + "You are not in a team.\n\nTo log in, use /login [token]"
-    msg(bot, update, m)
+    msg_formatted(bot, update, m)
 
 def submit(bot, update):
     if not is_submission_open():
@@ -96,7 +100,8 @@ def submit(bot, update):
 
     pattern = re.compile("^(T|L|PL|TL)-\d{1,3}(-\d{1,3})?$")
     if update.message.caption is None or not pattern.match(update.message.caption):
-        msg(bot, update, "Add the code of the task to the caption of the picture.")
+        msg_formatted(bot, update, f"Add the code of the task to the caption of the picture.\n" \
+            f"Use e.g. `L-1` for location 1, `PL-1-1` for bonus picture 1, location 1, `TL1-1` for task 1, location 1 or `T-1` for task 1")
         os.popen("rm {}".format(os.path.join(media_path, name)))
         return
 
@@ -113,7 +118,6 @@ def submit_open(bot, update):
         msg(bot, update, "Submissions have opened!")
     else:
         msg(bot, update, "Submissions are closed now.")
-
 
 
 start_handler = CommandHandler('start', start)
